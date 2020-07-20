@@ -12,8 +12,9 @@ import { useStaticQuery, graphql } from "gatsby"
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import { MdMessage, MdPerson, MdTrendingUp, MdAdd, MdHome } from "react-icons/md";
-import { IconContext } from "react-icons";
+import { MdMessage, MdPerson, MdTrendingUp,/* MdAdd,*/ MdHome } from "react-icons/md";
+// import { Link } from "gatsby"  
+
 
 
 
@@ -22,10 +23,10 @@ import "./layout.css"
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
+    width: "100%",
     position: 'fixed',
     bottom: 0,
-    // maxWidth: '200px'
+    // left: 'auto'
 
   },
   centerButton: {
@@ -55,20 +56,23 @@ const Layout = ({ children }) => {
         <main>{children}</main>
 
       </div>
-      <BottomNavigation
-        value={navvalue}
-        onChange={(event, newValue) => {
-          setNavvalue(newValue);
-        }}
-        showLabels
-        className={classes.root}
-      >
-        <BottomNavigationAction label="Home" icon={<MdHome />} />
-        <BottomNavigationAction label="Trending" icon={<MdTrendingUp />} onClick={() => { console.log("Fav") }} />
-        {/* <BottomNavigationAction className={classes.centerButton} icon={<WhiteLargeIcon />} /> */}
-        <BottomNavigationAction label="Messages" icon={<MdMessage />} />
-        <BottomNavigationAction label="Profile" icon={<MdPerson />} />
-      </BottomNavigation>
+      <div className={classes.root}>
+
+
+        <BottomNavigation
+          value={navvalue}
+          onChange={(event, newValue) => {
+            setNavvalue(newValue);
+          }}
+          showLabels
+
+        >
+          <BottomNavigationAction label="Home" icon={<MdHome />} />
+          <BottomNavigationAction label="Trending" icon={<MdTrendingUp />} onClick={() => { console.log("Fav") }} />
+          <BottomNavigationAction label="Messages" icon={<MdMessage />} onClick={() => { console.log("Messages") }} />
+          <BottomNavigationAction label="Profile" icon={<MdPerson />} />
+        </BottomNavigation>
+      </div>
       <footer>
         nav here
       </footer>
