@@ -1,7 +1,6 @@
 /**
  * Layout component that queries for data
  * with Gatsby's useStaticQuery component
- * import { FaBeer } from 'react-icons/fa';
 
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
@@ -9,32 +8,9 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import { MdMessage, MdPerson, MdTrendingUp,/* MdAdd,*/ MdHome } from "react-icons/md";
-// import { Link } from "gatsby"  
-
-
-
 
 // import Header from "./header"
 import "./layout.css"
-
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-    position: 'fixed',
-    bottom: 0,
-    // left: 'auto'
-
-  },
-  centerButton: {
-    backgroundColor: "lightblue"
-  }
-});
-
-
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -46,36 +22,14 @@ const Layout = ({ children }) => {
       }
     }
   `)
+
   console.log(data);
-  const classes = useStyles();
-  const [navvalue, setNavvalue] = React.useState('recents');
   return (
 
     <>
       <div>
         <main>{children}</main>
-
       </div>
-      <div className={classes.root}>
-
-
-        <BottomNavigation
-          value={navvalue}
-          onChange={(event, newValue) => {
-            setNavvalue(newValue);
-          }}
-          showLabels
-
-        >
-          <BottomNavigationAction label="Home" icon={<MdHome />} />
-          <BottomNavigationAction label="Trending" icon={<MdTrendingUp />} onClick={() => { console.log("Fav") }} />
-          <BottomNavigationAction label="Messages" icon={<MdMessage />} onClick={() => { console.log("Messages") }} />
-          <BottomNavigationAction label="Profile" icon={<MdPerson />} />
-        </BottomNavigation>
-      </div>
-      <footer>
-        nav here
-      </footer>
     </>
   )
 }
