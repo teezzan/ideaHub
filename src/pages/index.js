@@ -24,8 +24,6 @@ const APOLLO_QUERY = gql`
 const IndexPage = () => {
   const { data } = useQuery(APOLLO_QUERY);
   console.log(data);
-  var a = 555;
-  console.log(a === a.length);
   return (
     <Layout>
       <SEO title="Home" />
