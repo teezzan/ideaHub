@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -11,6 +11,8 @@ import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoConte
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import TextField from '@material-ui/core/TextField';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Lock from '@material-ui/icons/Lock';
+import Email from '@material-ui/icons/EmailRounded';
 
 
 const useStyles = makeStyles(({ breakpoints, spacing }) => ({
@@ -20,7 +22,7 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
         transition: '0.3s',
         boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)',
         position: 'relative',
-        maxWidth: 500,
+        maxWidth: 700,
         marginLeft: 'auto',
         overflow: 'initial',
         background: '#ffffff',
@@ -70,55 +72,138 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
     },
 }));
 
-export const LoginCard = React.memo(function BlogCard() {
+export const LoginCard = React.memo(function BlogCard(props) {
     const styles = useStyles();
     const {
         button: buttonStyles,
-        ...contentStyles
+        // ...contentStyles
     } = useBlogTextInfoContentStyles();
     const shadowStyles = useOverShadowStyles();
-    return (
-        <Card className={cx(styles.root, shadowStyles.root)}>
-            <CardMedia
-                className={styles.media}
-                image={
-                    'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/2000px-Git_icon.svg.png'
-                }
-            />
-            <CardContent>
-                <TextField
-                    // className={classes.margin}
-                    style={{ margin: '3px' }}
-                    color="success"
-                    id="input-with-icon-textfield"
-                    label="Username"
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <AccountCircle />
-                            </InputAdornment>
-                        ),
-                    }}
+    const [RegLog, setRegLog] = useState(true);
+    if (RegLog) {
+        return (
+            <Card className={cx(styles.root, shadowStyles.root)}>
+                <CardMedia
+                    className={styles.media}
+                    image={
+                        'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/2000px-Git_icon.svg.png'
+                    }
                 />
-                <TextField
-                    // className={classes.margin}
-                    style={{ margin: '3px' }}
-                    color="success"
-                    id="input-with-icon-textfield"
-                    label="Password"
-                    type="password"
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <AccountCircle />
-                            </InputAdornment>
-                        ),
-                    }}
+                <CardContent>
+                    <TextField
+                        style={{ margin: '3px' }}
+                        color="success"
+                        id="username"
+                        label="Username"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <AccountCircle />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                    <TextField
+                        // className={classes.margin}
+                        style={{ margin: '3px' }}
+                        color="success"
+                        id="password"
+                        label="Password"
+                        type="password"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Lock />
+
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                    <Button className={buttonStyles} style={{ margin: '15px' }}>Login</Button>
+                    <p>Don't have an account? Register <span onClick={() => { setRegLog(false) }} style={{ color: 'blue', cursor: 'select' }}>here</span>.</p>
+                </CardContent>
+
+            </Card>
+        );
+    }
+    else {
+        return (
+            <Card className={cx(styles.root, shadowStyles.root)}>
+                <CardMedia
+                    className={styles.media}
+                    image={
+                        'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/2000px-Git_icon.svg.png'
+                    }
                 />
-                <Button className={buttonStyles} style={{ margin: '5px' }}>Login</Button>
-            </CardContent>
-        </Card>
-    );
+                <CardContent>
+                    <TextField
+
+                        style={{ margin: '3px' }}
+                        color="success"
+                        id="email"
+                        label="Email"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Email />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                    <TextField
+                        style={{ margin: '3px' }}
+                        color="success"
+                        id="username"
+                        label="Username"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <AccountCircle />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                    <TextField
+                        style={{ margin: '3px' }}
+                        color="success"
+                        id="password"
+                        label="Password"
+                        type="password"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Lock />
+
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                    <TextField
+                        style={{ margin: '3px' }}
+                        color="success"
+                        id="password"
+                        label="Confirm Password"
+                        type="password"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Lock />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                    <br />
+                    <Button className={buttonStyles} style={{ margin: '15px' }}>Register</Button>
+                    <p>Already have an account? Login <span onClick={() => { setRegLog(true) }} style={{ color: 'blue', cursor: 'select' }}>here</span>.</p>
+
+                </CardContent>
+
+
+            </Card>
+        );
+    }
+
+
 });
 
 export default LoginCard
