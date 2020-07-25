@@ -42,7 +42,7 @@ const BottomNav = ({ selection }) => {
                 <BottomNavigationAction label="Home" icon={<MdHome />} component={Link} to={'/'} />
                 <BottomNavigationAction label="Trending" icon={<MdTrendingUp />} component={Link} to={'/page-2'} onClick={() => { console.log("Messages") }} />
                 <BottomNavigationAction label="Messages" icon={<MdMessage />} onClick={() => { console.log("Messages") }} />
-                <BottomNavigationAction label="Profile" icon={<MdPerson />} />
+                <BottomNavigationAction label="Profile" icon={<MdPerson />} component={Link} to={'/signin'} />
             </BottomNavigation>
         </div>
 

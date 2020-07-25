@@ -9,7 +9,7 @@ const signin = () => {
     return (
         <Layout>
             <LoginComponent />
-            <BottomNav selection={null} />
+            <BottomNav selection={3} />
         </Layout>
     )
 }

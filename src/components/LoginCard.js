@@ -92,7 +92,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                 <CardContent>
                     <TextField
                         style={{ margin: '3px' }}
-                        color="success"
+                        //color="success"
                         id="username"
                         label="Username"
                         InputProps={{
@@ -106,7 +106,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                     <TextField
                         // className={classes.margin}
                         style={{ margin: '3px' }}
-                        color="success"
+                        //color="success"
                         id="password"
                         label="Password"
                         type="password"
@@ -120,7 +120,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                         }}
                     />
                     <Button className={buttonStyles} style={{ margin: '15px' }}>Login</Button>
-                    <p>Don't have an account? Register <span onClick={() => { setRegLog(false) }} style={{ color: 'blue', cursor: 'select' }}>here</span>.</p>
+                    <p>Don't have an account? Register <span onClick={() => { setRegLog(false) }} style={{ color: 'blue', cursor: 'select' }} onKeyDown={() => { setRegLog(false) }}>here</span>.</p>
                 </CardContent>
 
             </Card>
@@ -139,7 +139,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                     <TextField
 
                         style={{ margin: '3px' }}
-                        color="success"
+                        // //color="success"
                         id="email"
                         label="Email"
                         InputProps={{
@@ -152,7 +152,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                     />
                     <TextField
                         style={{ margin: '3px' }}
-                        color="success"
+                        //color="success"
                         id="username"
                         label="Username"
                         InputProps={{
@@ -165,8 +165,8 @@ export const LoginCard = React.memo(function BlogCard(props) {
                     />
                     <TextField
                         style={{ margin: '3px' }}
-                        color="success"
-                        id="password"
+                        // //color="success"
+                        id="reg_password"
                         label="Password"
                         type="password"
                         InputProps={{
@@ -180,8 +180,8 @@ export const LoginCard = React.memo(function BlogCard(props) {
                     />
                     <TextField
                         style={{ margin: '3px' }}
-                        color="success"
-                        id="password"
+                        //color="success"
+                        id="conf_reg_password"
                         label="Confirm Password"
                         type="password"
                         InputProps={{
@@ -194,7 +194,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                     />
                     <br />
                     <Button className={buttonStyles} style={{ margin: '15px' }}>Register</Button>
-                    <p>Already have an account? Login <span onClick={() => { setRegLog(true) }} style={{ color: 'blue', cursor: 'select' }}>here</span>.</p>
+                    <p>Already have an account? Login <span onClick={() => { setRegLog(true) }} style={{ color: 'blue', cursor: 'select' }} onKeyDown={() => { setRegLog(true) }}>here</span>.</p>
 
                 </CardContent>
 
