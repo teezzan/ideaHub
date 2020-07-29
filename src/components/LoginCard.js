@@ -119,7 +119,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                             ),
                         }}
                     />
-                    <Button className={buttonStyles} style={{ margin: '15px' }}>Login</Button>
+                    <Button className={buttonStyles} style={{ margin: '15px' }} onClick={props.onReg}>Login</Button>
                     <p>Don't have an account? Register <span onClick={() => { setRegLog(false) }} style={{ color: 'blue', cursor: 'select' }} onKeyDown={() => { setRegLog(false) }}>here</span>.</p>
                 </CardContent>
 
@@ -193,7 +193,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                         }}
                     />
                     <br />
-                    <Button className={buttonStyles} style={{ margin: '15px' }}>Register</Button>
+                    <Button className={buttonStyles} style={{ margin: '15px' }} onClick={props.onReg}>Register</Button>
                     <p>Already have an account? Login <span onClick={() => { setRegLog(true) }} style={{ color: 'blue', cursor: 'select' }} onKeyDown={() => { setRegLog(true) }}>here</span>.</p>
 
                 </CardContent>
