@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Lock from '@material-ui/icons/Lock';
 import Email from '@material-ui/icons/EmailRounded';
+import Eye from '@material-ui/icons/PanoramaFishEyeRounded';
 
 
 const useStyles = makeStyles(({ breakpoints, spacing }) => ({
@@ -80,7 +81,9 @@ export const LoginCard = React.memo(function BlogCard(props) {
     } = useBlogTextInfoContentStyles();
     const shadowStyles = useOverShadowStyles();
     const [RegLog, setRegLog] = useState(true);
+    const [showPassword, setshowPassword] = useState(true);
     if (RegLog) {
+
         return (
             <Card className={cx(styles.root, shadowStyles.root)}>
                 <CardMedia
@@ -94,6 +97,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                         style={{ margin: '3px' }}
                         //color="success"
                         id="username"
+                        className="input"
                         label="Username"
                         InputProps={{
                             startAdornment: (
@@ -108,21 +112,30 @@ export const LoginCard = React.memo(function BlogCard(props) {
                         style={{ margin: '3px' }}
                         //color="success"
                         id="password"
+                        className="input"
                         label="Password"
-                        type="password"
+                        type={showPassword ? "password" : "text"}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
                                     <Lock />
-
                                 </InputAdornment>
                             ),
+                            endAdornment: (
+                                <InputAdornment position="start">
+                                    <Eye onClick={() => setshowPassword(!showPassword)} />
+                                </InputAdornment>
+                            )
                         }}
                     />
-                    <Button className={buttonStyles} style={{ margin: '15px' }} onClick={props.onReg}>Login</Button>
-                    <p>Don't have an account? Register <span onClick={() => { setRegLog(false) }} style={{ color: 'blue', cursor: 'select' }} onKeyDown={() => { setRegLog(false) }}>here</span>.</p>
+                    <Button className={buttonStyles} style={{ margin: '15px' }} onClick={props.onLog}>Login</Button>
+                    <p>Don't have an account? Register
+                        <span onClick={() => {
+                            document.getElementById('username').value = "";
+                            document.getElementById('password').value = "";
+                            setRegLog(false)
+                        }} style={{ color: 'blue', cursor: 'select' }} onKeyDown={() => { setRegLog(false) }}> here</span>.</p>
                 </CardContent>
-
             </Card>
         );
     }
@@ -137,9 +150,21 @@ export const LoginCard = React.memo(function BlogCard(props) {
                 />
                 <CardContent>
                     <TextField
+                        style={{ margin: '3px' }}
+                        id="username"
+                        label="Username"
+                        className="input"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <AccountCircle />
+                                </InputAdornment>
+                            )
+                        }}
+                    />
+                    <TextField
 
                         style={{ margin: '3px' }}
-                        // //color="success"
                         id="email"
                         label="Email"
                         InputProps={{
@@ -152,49 +177,33 @@ export const LoginCard = React.memo(function BlogCard(props) {
                     />
                     <TextField
                         style={{ margin: '3px' }}
-                        //color="success"
-                        id="username"
-                        label="Username"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <AccountCircle />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                    <TextField
-                        style={{ margin: '3px' }}
                         // //color="success"
-                        id="reg_password"
+                        id="password"
+                        className="input"
                         label="Password"
-                        type="password"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <Lock />
-
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                    <TextField
-                        style={{ margin: '3px' }}
-                        //color="success"
-                        id="conf_reg_password"
-                        label="Confirm Password"
-                        type="password"
+                        type={showPassword ? "password" : "text"}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
                                     <Lock />
                                 </InputAdornment>
                             ),
+                            endAdornment: (
+                                <InputAdornment position="start">
+                                    <Eye onClick={() => setshowPassword(!showPassword)} />
+                                </InputAdornment>
+                            )
                         }}
                     />
                     <br />
                     <Button className={buttonStyles} style={{ margin: '15px' }} onClick={props.onReg}>Register</Button>
-                    <p>Already have an account? Login <span onClick={() => { setRegLog(true) }} style={{ color: 'blue', cursor: 'select' }} onKeyDown={() => { setRegLog(true) }}>here</span>.</p>
+                    <p>Already have an account? Login
+                        <span onClick={() => {
+                            document.getElementById('username').value = "";
+                            document.getElementById('email').value = "";
+                            document.getElementById('password').value = "";
+                            setRegLog(true)
+                        }} style={{ color: 'blue', cursor: 'select' }} onKeyDown={() => { setRegLog(true) }}> here</span>.</p>
 
                 </CardContent>
 
