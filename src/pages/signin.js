@@ -21,7 +21,16 @@ mutation Register($password: String!, $username: String!, $email: String!) {
 }
 `;
 
-
+const LOG = gql`
+mutation Login($password: String!, $username: String!) {
+  login(password: $password, username: $username){
+    message
+    status
+    error
+    token
+  }
+}
+`;
 
 
 
@@ -31,6 +40,7 @@ const SignIn = () => {
 
 
   const [addReg, { data: regdata }] = useMutation(REG);
+  const [addLog, { data: logdata }] = useMutation(LOG);
 
   const handleReg = () => {
     var username = document.getElementById('username').value;
@@ -42,12 +52,20 @@ const SignIn = () => {
   }
   const handelLog = () => {
     console.log("oyaaaa Log in oooo ooooo");
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    addLog({ variables: { password, username } });
+
   }
   return (
     <Layout>
 
       {regdata && (
         <p> {JSON.stringify(regdata)}</p>
+      )}
+
+      {logdata && (
+        <p> {JSON.stringify(logdata)}</p>
       )}
 
       <div style={{ marginTop: '57px', }}>
