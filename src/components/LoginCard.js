@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -16,6 +16,7 @@ import Email from '@material-ui/icons/EmailRounded';
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import SocketContext from '../components/socket_context/context';
 import { getQueueLength, checkUsername } from '../socket/emit'
+import _ from 'lodash';
 
 
 
@@ -76,8 +77,9 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
     },
 }));
 
-
 export const LoginCard = React.memo(function BlogCard(props) {
+    const glob = useContext(SocketContext);
+
     const styles = useStyles();
     const {
         button: buttonStyles,
@@ -86,6 +88,18 @@ export const LoginCard = React.memo(function BlogCard(props) {
     const shadowStyles = useOverShadowStyles();
     const [RegLog, setRegLog] = useState(true);
     const [showPassword, setshowPassword] = useState(true);
+    const [usernameErr, setusernameErr] = useState(false);
+    const [checkUsernamedata, setcheckUsername] = useState({});
+    useEffect(() => {
+        // console.log(glob);
+        var checkUsername = glob.checkUsername
+        console.log(checkUsername)
+        if (!_.isEmpty(checkUsername)) {
+            setcheckUsername(checkUsername);
+        } else {
+            setcheckUsername({ username: "", available: true });
+        }
+    }, [glob])
     if (RegLog) {
 
         return (
@@ -159,13 +173,13 @@ export const LoginCard = React.memo(function BlogCard(props) {
                     }
                 />
                 <CardContent>
-                    <button onClick={getQueueLength}> getdata</button>
+                    {/* <button onClick={() => { console.log(glob) }}> getdata</button> */}
                     <TextField
                         style={{ margin: '3px' }}
-                        error={false}
+                        error={!checkUsernamedata.available}
                         fullWidth
                         label="Error"
-                        helperText=""
+                        helperText={checkUsernamedata.available ? "" : "Not avaiable"}
                         id="username"
                         label="Username"
                         InputProps={{
