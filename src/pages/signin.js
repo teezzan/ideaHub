@@ -4,6 +4,7 @@ import Layout from "../components/layout"
 import BottomNav from "../components/bottomNav"
 // import { Button } from "@material-ui/core";
 import LoginCard from "../components/LoginCard";
+import _ from 'lodash';
 
 
 const REG = gql`
@@ -43,11 +44,10 @@ const SignIn = () => {
   const [addLog, { data: logdata }] = useMutation(LOG);
 
   useEffect(() => {
-    if (logdata) {
+    if (!_.isEmpty(logdata)) {
 
-      if (!!logdata.status.token) {
-        console.log(logdata.login.token);
-      }
+      console.log(logdata.login.token);
+
     }
   }, [logdata])
 

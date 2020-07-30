@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -13,7 +13,10 @@ import TextField from '@material-ui/core/TextField';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Lock from '@material-ui/icons/Lock';
 import Email from '@material-ui/icons/EmailRounded';
-import Eye from '@material-ui/icons/PanoramaFishEyeRounded';
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import SocketContext from '../components/socket_context/context';
+import { getQueueLength, checkUsername } from '../socket/emit'
+
 
 
 const useStyles = makeStyles(({ breakpoints, spacing }) => ({
@@ -73,6 +76,7 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
     },
 }));
 
+
 export const LoginCard = React.memo(function BlogCard(props) {
     const styles = useStyles();
     const {
@@ -85,6 +89,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
     if (RegLog) {
 
         return (
+
             <Card className={cx(styles.root, shadowStyles.root)}>
                 <CardMedia
                     className={styles.media}
@@ -99,6 +104,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                         id="username"
                         className="input"
                         label="Username"
+                        fullWidth
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -113,6 +119,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                         //color="success"
                         id="password"
                         className="input"
+                        fullWidth
                         label="Password"
                         type={showPassword ? "password" : "text"}
                         InputProps={{
@@ -123,7 +130,9 @@ export const LoginCard = React.memo(function BlogCard(props) {
                             ),
                             endAdornment: (
                                 <InputAdornment position="start">
-                                    <Eye onClick={() => setshowPassword(!showPassword)} />
+
+                                    {showPassword ? (<FaRegEyeSlash onClick={() => setshowPassword(!showPassword)} />) : (<FaRegEye onClick={() => setshowPassword(!showPassword)} />)}
+
                                 </InputAdornment>
                             )
                         }}
@@ -136,6 +145,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                             setRegLog(false)
                         }} style={{ color: 'blue', cursor: 'select' }} onKeyDown={() => { setRegLog(false) }}> here</span>.</p>
                 </CardContent>
+
             </Card>
         );
     }
@@ -149,11 +159,15 @@ export const LoginCard = React.memo(function BlogCard(props) {
                     }
                 />
                 <CardContent>
+                    <button onClick={getQueueLength}> getdata</button>
                     <TextField
                         style={{ margin: '3px' }}
+                        error={false}
+                        fullWidth
+                        label="Error"
+                        helperText=""
                         id="username"
                         label="Username"
-                        className="input"
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -161,11 +175,19 @@ export const LoginCard = React.memo(function BlogCard(props) {
                                 </InputAdornment>
                             )
                         }}
+                        onChange={() => {
+                            var username = document.getElementById('username').value;
+                            checkUsername(username);
+                            console.log("working!!! => ", username)
+                        }}
                     />
-                    <TextField
 
+
+
+                    <TextField
                         style={{ margin: '3px' }}
                         id="email"
+                        fullWidth
                         label="Email"
                         InputProps={{
                             startAdornment: (
@@ -174,13 +196,15 @@ export const LoginCard = React.memo(function BlogCard(props) {
                                 </InputAdornment>
                             ),
                         }}
-                    />
+                    /><br />
+
                     <TextField
                         style={{ margin: '3px' }}
                         // //color="success"
                         id="password"
                         className="input"
                         label="Password"
+                        fullWidth
                         type={showPassword ? "password" : "text"}
                         InputProps={{
                             startAdornment: (
@@ -190,13 +214,15 @@ export const LoginCard = React.memo(function BlogCard(props) {
                             ),
                             endAdornment: (
                                 <InputAdornment position="start">
-                                    <Eye onClick={() => setshowPassword(!showPassword)} />
+                                    {showPassword ? (<FaRegEyeSlash onClick={() => setshowPassword(!showPassword)} />) : (<FaRegEye onClick={() => setshowPassword(!showPassword)} />)}
                                 </InputAdornment>
                             )
                         }}
                     />
+
                     <br />
                     <Button className={buttonStyles} style={{ margin: '15px' }} onClick={props.onReg}>Register</Button>
+
                     <p>Already have an account? Login
                         <span onClick={() => {
                             document.getElementById('username').value = "";
