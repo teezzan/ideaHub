@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { gql, useMutation } from '@apollo/client';
 import Layout from "../components/layout"
 import BottomNav from "../components/bottomNav"
@@ -42,6 +42,15 @@ const SignIn = () => {
   const [addReg, { data: regdata }] = useMutation(REG);
   const [addLog, { data: logdata }] = useMutation(LOG);
 
+  useEffect(() => {
+    if (logdata) {
+
+      if (!!logdata.status.token) {
+        console.log(logdata.login.token);
+      }
+    }
+  }, [logdata])
+
   const handleReg = () => {
     var username = document.getElementById('username').value;
     var email = document.getElementById('email').value;
@@ -59,13 +68,8 @@ const SignIn = () => {
   }
   return (
     <Layout>
-
       {regdata && (
         <p> {JSON.stringify(regdata)}</p>
-      )}
-
-      {logdata && (
-        <p> {JSON.stringify(logdata)}</p>
       )}
 
       <div style={{ marginTop: '57px', }}>
