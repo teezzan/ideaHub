@@ -113,7 +113,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                     }
                 />
                 <CardContent>
-                    {props.logalert && (<Alert severity="error">This is an error alert — check it out!</Alert>)}
+                    {props.logalert && (<Alert severity="error">Error Loging in. Check Details</Alert>)}
 
                     <TextField
                         style={{ margin: '3px' }}
@@ -177,7 +177,7 @@ export const LoginCard = React.memo(function BlogCard(props) {
                 />
                 <CardContent>
                     {/* <button onClick={() => { console.log(glob) }}> getdata</button> */}
-                    {props.regalert && (<Alert severity="error">This is an error alert — check it out!</Alert>)}
+                    {props.regalert && (<Alert severity="error">Error Registering. Check Details.</Alert>)}
                     <TextField
                         style={{ margin: '3px' }}
                         error={!checkUsernamedata.available}
