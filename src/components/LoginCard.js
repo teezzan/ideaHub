@@ -17,6 +17,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import SocketContext from '../components/socket_context/context';
 import { getQueueLength, checkUsername } from '../socket/emit'
 import _ from 'lodash';
+import Alert from '@material-ui/lab/Alert';
 
 
 
@@ -112,6 +113,8 @@ export const LoginCard = React.memo(function BlogCard(props) {
                     }
                 />
                 <CardContent>
+                    {props.logalert && (<Alert severity="error">This is an error alert — check it out!</Alert>)}
+
                     <TextField
                         style={{ margin: '3px' }}
                         //color="success"
@@ -174,12 +177,13 @@ export const LoginCard = React.memo(function BlogCard(props) {
                 />
                 <CardContent>
                     {/* <button onClick={() => { console.log(glob) }}> getdata</button> */}
+                    {props.regalert && (<Alert severity="error">This is an error alert — check it out!</Alert>)}
                     <TextField
                         style={{ margin: '3px' }}
                         error={!checkUsernamedata.available}
                         fullWidth
                         label="Error"
-                        helperText={checkUsernamedata.available ? "" : "Not avaiable"}
+                        helperText={checkUsernamedata.available ? "" : `${checkUsernamedata.username} is Not available`}
                         id="username"
                         label="Username"
                         InputProps={{
@@ -235,7 +239,9 @@ export const LoginCard = React.memo(function BlogCard(props) {
                     />
 
                     <br />
-                    <Button className={buttonStyles} style={{ margin: '15px' }} onClick={props.onReg}>Register</Button>
+                    <Button
+                        disabled={(!checkUsernamedata.available)}
+                        className={buttonStyles} style={{ margin: '15px' }} onClick={props.onReg}>Register</Button>
 
                     <p>Already have an account? Login
                         <span onClick={() => {

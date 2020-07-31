@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { gql, useMutation } from '@apollo/client';
 import Layout from "../components/layout"
 import BottomNav from "../components/bottomNav"
@@ -42,11 +42,19 @@ const SignIn = () => {
 
   const [addReg, { data: regdata }] = useMutation(REG);
   const [addLog, { data: logdata }] = useMutation(LOG);
+  const [logerror, setlogerror] = useState(false);
+  const [regerror, setregerror] = useState(false);
 
   useEffect(() => {
     if (!_.isEmpty(logdata)) {
+      console.log(logdata)
+      if (logdata.login.status === '200') {
 
-      console.log(logdata.login.token);
+        console.log(logdata.login.token);
+      } else {
+        console.log("Wrong Login Details");
+        setlogerror(true);
+      }
 
     }
   }, [logdata])
@@ -73,7 +81,7 @@ const SignIn = () => {
       )}
 
       <div style={{ marginTop: '57px', }}>
-        <LoginCard reg={addReg} onReg={handleReg} onLog={handelLog} />
+        <LoginCard reg={addReg} onReg={handleReg} onLog={handelLog} logalert={logerror} regalert={regerror} />
       </div>
       <BottomNav selection={3} />
     </Layout>
