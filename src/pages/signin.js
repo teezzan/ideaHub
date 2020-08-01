@@ -51,6 +51,8 @@ const SignIn = () => {
       if (logdata.login.status === '200') {
 
         console.log(logdata.login.token);
+        localStorage.setItem("token", logdata.login.token);
+        //redirect to profile page
       } else {
         console.log("Wrong Login Details");
         setlogerror(true);
@@ -58,6 +60,25 @@ const SignIn = () => {
 
     }
   }, [logdata])
+
+
+  useEffect(() => {
+
+    if (!_.isEmpty(regdata)) {
+      console.log(regdata)
+      if (regdata.register.status === '200') {
+
+        console.log(regdata);
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        addLog({ variables: { password, username } });
+      } else {
+        console.log("Wrong Register Details");
+        setregerror(true);
+      }
+
+    }
+  }, [regdata, addLog])
 
   const handleReg = () => {
     var username = document.getElementById('username').value;
