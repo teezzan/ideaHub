@@ -97,9 +97,9 @@ const SignIn = () => {
   }
   return (
     <Layout>
-      {regdata && (
+      {/* {regdata && (
         <p> {JSON.stringify(regdata)}</p>
-      )}
+      )} */}
 
       <div style={{ marginTop: '57px', }}>
         <LoginCard reg={addReg} onReg={handleReg} onLog={handelLog} logalert={logerror} regalert={regerror} />

@@ -15,7 +15,7 @@ import Lock from '@material-ui/icons/Lock';
 import Email from '@material-ui/icons/EmailRounded';
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import SocketContext from '../components/socket_context/context';
-import { getQueueLength, checkUsername } from '../socket/emit'
+import { checkUsername } from '../socket/emit'
 import _ from 'lodash';
 import Alert from '@material-ui/lab/Alert';
 
@@ -89,7 +89,6 @@ export const LoginCard = React.memo(function BlogCard(props) {
     const shadowStyles = useOverShadowStyles();
     const [RegLog, setRegLog] = useState(true);
     const [showPassword, setshowPassword] = useState(true);
-    const [usernameErr, setusernameErr] = useState(false);
     const [checkUsernamedata, setcheckUsername] = useState({});
     useEffect(() => {
         // console.log(glob);
