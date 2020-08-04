@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ListItemComp() {
+export default function ListItemComp(props) {
     const classes = useStyles();
-
+    const [like, setLike] = useState(props.list.liked);
     return (
         <React.Fragment>
 
@@ -28,25 +28,24 @@ export default function ListItemComp() {
                     <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
                 </ListItemAvatar>
                 <ListItemText
-                    primary="Oui Oui"
+                    primary={props.list.title}
                     secondary={
                         <React.Fragment>
                             <Typography
                                 component="span"
                                 variant="body2"
-                                className={classes.inline}
-                                color="textPrimary"
-                            >
-                                Sandra Adams
-                  </Typography>
-                            {' — I llbe in your neighborhood doing errands this   Do you have Paris recommendations? Have you ever…'}
+                                // className={classes.inline}
+                                color="textSecondary"
+
+                            >@{props.list.description}
+                            </Typography>
                         </React.Fragment>
                     }
                 />
 
                 <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="like">
-                        <FaHeart />
+                    <IconButton edge="end" aria-label="like" onClick={() => { console.log('clicked'); setLike(!like) }}>
+                        <FaHeart color={like ? 'red' : ""} />
                     </IconButton>
                 </ListItemSecondaryAction>
             </ListItem>
