@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
   return (
 
     <>
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <main>{children}</main>
       </Container>
     </>
